@@ -8,10 +8,16 @@ const LaunchRequestHandler = {
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
   },
   handle(handlerInput) {
-    const speakOutput = 'Welcome to Christ Mix Radio! Say play to start streaming.';
+    const speakOutput = 'Welcome to Christ Mix Radio';
     return handlerInput.responseBuilder
       .speak(speakOutput)
-      .reprompt(speakOutput)
+      .addAudioPlayerPlayDirective(
+        'REPLACE_ALL',
+        STREAM_URL,
+        STREAM_TOKEN,
+        0,
+        undefined
+      )
       .getResponse();
   },
 };
